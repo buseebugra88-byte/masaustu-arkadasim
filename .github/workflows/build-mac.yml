@@ -1,0 +1,36 @@
+name: Mac uygulamasını derle
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - name: Paketle
+        run: npx @electron/packager app Arkadasim --platform=darwin --arch=arm64 --icon=app/icon.icns --app-bundle-id=com.buse.arkadasim --app-version="${GITHUB_REF_NAME#v}" --out=out --overwrite
+      - name: İmzala (ad-hoc) ve sıkıştır
+        run: |
+          APP="out/Arkadasim-darwin-arm64/Arkadasim.app"
+          codesign --force --deep --sign - "$APP"
+          codesign --verify --deep --strict "$APP"
+          ditto -c -k --keepParent "$APP" Arkadasim-mac.zip
+      - name: İndirme sayfasına koy
+        uses: softprops/action-gh-release@v2
+        with:
+          files: Arkadasim-mac.zip
+          name: Arkadaşım ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          body: |
+            Apple çipli Mac'ler için. Arkadasim-mac.zip dosyasını indir, çift tıkla, uygulamayı Uygulamalar klasörüne sürükle.
+            İlk açılışta Mac uyarı verirse: Sistem Ayarları → Gizlilik ve Güvenlik → Yine de Aç.
