@@ -2,7 +2,8 @@ name: Mac uygulamasını derle
 
 on:
   push:
-    tags: ['v*']
+    branches: [main]
+    paths: ['app/**', '.github/workflows/build-mac.yml']
   workflow_dispatch:
 
 permissions:
@@ -16,9 +17,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Sürümü oku
+        id: ver
+        run: echo "v=$(node -p "require('./app/package.json').version")" >> "$GITHUB_OUTPUT"
       - run: npm install
       - name: Paketle
-        run: npx @electron/packager app Arkadasim --platform=darwin --arch=arm64 --icon=app/icon.icns --app-bundle-id=com.buse.arkadasim --app-version="${GITHUB_REF_NAME#v}" --out=out --overwrite
+        run: npx @electron/packager app Arkadasim --platform=darwin --arch=arm64 --icon=app/icon.icns --app-bundle-id=com.buse.arkadasim --app-version="${{ steps.ver.outputs.v }}" --out=out --overwrite
       - name: İmzala (ad-hoc) ve sıkıştır
         run: |
           APP="out/Arkadasim-darwin-arm64/Arkadasim.app"
@@ -29,8 +33,9 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: Arkadasim-mac.zip
-          name: Arkadaşım ${{ github.ref_name }}
-          tag_name: ${{ github.ref_name }}
+          name: Arkadaşım ${{ steps.ver.outputs.v }}
+          tag_name: v${{ steps.ver.outputs.v }}
+          make_latest: true
           body: |
             Apple çipli Mac'ler için. Arkadasim-mac.zip dosyasını indir, çift tıkla, uygulamayı Uygulamalar klasörüne sürükle.
             İlk açılışta Mac uyarı verirse: Sistem Ayarları → Gizlilik ve Güvenlik → Yine de Aç.
