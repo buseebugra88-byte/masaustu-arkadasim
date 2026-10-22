@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Arkadaşım</title>
+<link rel="stylesheet" href="pet.css">
+</head>
+<body>
+  <div id="panel" class="card hit" hidden></div>
+
+  <div id="menu" class="hit" hidden>
+    <button data-act="feed" title="Besle"><span>🍪</span><small>Besle</small></button>
+    <button data-act="play" title="Oyna"><span>🎈</span><small>Oyna</small></button>
+    <button data-act="read" title="Birlikte oku"><span>📖</span><small>Oku</small></button>
+    <button data-act="music" title="Müzik"><span>🎧</span><small>Müzik</small></button>
+    <button data-act="chat" title="Sohbet"><span>💬</span><small>Sohbet</small></button>
+    <button data-act="sleep" title="Uyu"><span id="sleepIcon">😴</span><small id="sleepLabel">Uyu</small></button>
+    <button data-act="settings" title="Ayarlar"><span>⚙️</span><small>Ayarlar</small></button>
+  </div>
+
+  <div id="bubble" hidden></div>
+
+  <div id="stage">
+    <div id="bars" hidden>
+      <div class="bar" title="Tokluk"><i>🍪</i><b><u id="barFood"></u></b></div>
+      <div class="bar" title="Mutluluk"><i>💗</i><b><u id="barJoy"></u></b></div>
+      <div class="bar" title="Enerji"><i>⚡</i><b><u id="barEnergy"></u></b></div>
+    </div>
+    <div id="pet" class="hit">
+      <div id="flip">
+        <div id="body" class="idle">
+          <img id="petImg" alt="" draggable="false">
+          <div id="fx"></div>
+        </div>
+      </div>
+      <div id="shadow"></div>
+    </div>
+    <div id="timer" class="hit" hidden><span id="timerText"></span><button id="timerStop" title="Bitir">✕</button></div>
+  </div>
+
+  <script type="module" src="pet.js"></script>
+</body>
+</html>

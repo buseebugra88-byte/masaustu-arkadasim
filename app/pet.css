@@ -1,0 +1,134 @@
+:root {
+  --cream: #fffaf0;
+  --paper: #fbf3e2;
+  --ink: #5b4636;
+  --ink-soft: #8a7462;
+  --line: #e7d8bf;
+  --peach: #f4b3a5;
+  --leaf: #a9c99a;
+  --sky: #a9c8db;
+  --butter: #f3d58c;
+  --shadow: 0 6px 22px rgba(91, 70, 54, .18);
+  font-family: ui-rounded, "SF Pro Rounded", -apple-system, "Helvetica Neue", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: transparent; overflow: hidden; user-select: none; -webkit-user-select: none; color: var(--ink); }
+body { display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding: 0 10px 6px; }
+button { font: inherit; color: inherit; cursor: pointer; }
+[hidden] { display: none !important; }
+
+/* ---- Kart ve panel ---- */
+.card { background: var(--cream); border: 2px solid var(--line); border-radius: 22px; box-shadow: var(--shadow); }
+#panel { width: 100%; max-height: 310px; display: flex; flex-direction: column; margin-bottom: 8px; overflow: hidden; animation: pop .22s ease-out; }
+.ph { display: flex; align-items: center; gap: 8px; padding: 10px 12px 6px 14px; font-weight: 600; font-size: 14px; }
+.ph .x { margin-left: auto; border: 0; background: var(--paper); width: 26px; height: 26px; border-radius: 50%; font-size: 13px; color: var(--ink-soft); }
+.pb { padding: 4px 14px 12px; overflow: auto; font-size: 13.5px; }
+.muted { color: var(--ink-soft); font-size: 12.5px; line-height: 1.45; }
+.btn { border: 2px solid var(--line); background: #fff; border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 600; transition: transform .12s; }
+.btn:hover { transform: translateY(-1px); background: var(--paper); }
+.btn.main { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.btn.main:hover { background: #4a382a; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.chip { border: 2px solid var(--line); background: #fff; border-radius: 999px; padding: 5px 11px; font-size: 12.5px; }
+.chip.on { background: var(--butter); border-color: #e3c070; }
+input.field { width: 100%; border: 2px solid var(--line); background: #fff; border-radius: 14px; padding: 8px 12px; font: inherit; font-size: 13.5px; color: var(--ink); outline: none; }
+input.field:focus { border-color: #cfb48a; }
+.row { display: flex; gap: 8px; align-items: center; }
+
+/* yemek */
+.foods { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 4px; }
+.food { border: 2px solid var(--line); background: #fff; border-radius: 16px; padding: 8px 2px 6px; display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 11.5px; }
+.food span { font-size: 26px; line-height: 1; }
+.food:hover { background: var(--paper); transform: translateY(-2px); }
+
+/* sohbet */
+#msgs { display: flex; flex-direction: column; gap: 6px; overflow-y: auto; flex: 1; min-height: 90px; max-height: 170px; padding: 2px 12px 8px; }
+.m { max-width: 82%; padding: 7px 11px; border-radius: 16px; font-size: 13.5px; line-height: 1.4; user-select: text; -webkit-user-select: text; white-space: pre-wrap; }
+.m.me { align-self: flex-end; background: var(--ink); color: var(--cream); border-bottom-right-radius: 5px; }
+.m.it { align-self: flex-start; background: var(--paper); border-bottom-left-radius: 5px; }
+.chatbar { display: flex; gap: 6px; padding: 8px 10px 10px; border-top: 2px dashed var(--line); }
+.chatbar .btn { padding: 7px 12px; }
+.brain { margin: 0 12px 6px; padding: 7px 10px; background: var(--paper); border-radius: 12px; font-size: 12px; color: var(--ink-soft); display: flex; gap: 8px; align-items: center; }
+.brain .btn { padding: 4px 10px; font-size: 12px; white-space: nowrap; }
+.prog { height: 6px; background: #fff; border-radius: 6px; overflow: hidden; margin-top: 4px; }
+.prog i { display: block; height: 100%; background: var(--leaf); width: 0; transition: width .3s; }
+
+/* oyun */
+#game { position: relative; height: 170px; background: linear-gradient(#fff7ea, #fdf0dc); border-radius: 16px; overflow: hidden; cursor: pointer; }
+.heart { position: absolute; font-size: 26px; transition: transform .1s; }
+.heart.pop { transform: scale(1.6); opacity: 0; transition: all .25s; }
+#gameScore { position: absolute; top: 6px; right: 10px; font-weight: 700; font-size: 13px; }
+
+/* ---- Menü ---- */
+#menu { display: flex; flex-wrap: nowrap; justify-content: center; gap: 1px; margin-bottom: 6px; padding: 6px; background: rgba(255, 250, 240, .96); border: 2px solid var(--line); border-radius: 26px; box-shadow: var(--shadow); animation: pop .2s ease-out; }
+#menu button { border: 0; background: transparent; width: 44px; height: 50px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; }
+#menu button span { font-size: 21px; line-height: 1.1; }
+#menu button small { font-size: 10px; color: var(--ink-soft); font-weight: 600; }
+#menu button:hover { background: var(--paper); transform: translateY(-2px); }
+
+/* ---- Konuşma balonu ---- */
+#bubble { position: relative; max-width: 270px; background: var(--cream); border: 2px solid var(--line); border-radius: 18px; padding: 8px 13px; font-size: 13.5px; line-height: 1.4; box-shadow: var(--shadow); margin-bottom: 10px; animation: pop .22s ease-out; text-align: center; }
+#bubble::after { content: ""; position: absolute; bottom: -9px; left: 50%; width: 14px; height: 14px; background: var(--cream); border-right: 2px solid var(--line); border-bottom: 2px solid var(--line); transform: translateX(-50%) rotate(45deg); border-bottom-right-radius: 4px; }
+#bubble.fade { animation: fadeout .4s forwards; }
+
+/* ---- Sahne ---- */
+#stage { position: relative; display: flex; flex-direction: column; align-items: center; }
+#pet { position: relative; cursor: grab; touch-action: none; }
+#pet.dragging { cursor: grabbing; }
+#flip { transition: transform .25s; }
+#flip.left { transform: scaleX(-1); }
+#body { position: relative; transform-origin: 50% 100%; }
+#petImg { display: block; height: 170px; width: auto; max-width: 300px; pointer-events: none; filter: drop-shadow(0 1px 0 rgba(255,255,255,.4)); }
+#fx { position: absolute; inset: 0; pointer-events: none; }
+#shadow { position: absolute; left: 50%; bottom: -4px; width: 55%; height: 10px; transform: translateX(-50%); background: radial-gradient(ellipse at center, rgba(91,70,54,.22), rgba(91,70,54,0) 70%); z-index: -1; }
+
+#bars { position: absolute; top: -6px; right: -86px; display: flex; flex-direction: column; gap: 4px; background: rgba(255,250,240,.95); border: 2px solid var(--line); border-radius: 14px; padding: 6px 8px; box-shadow: var(--shadow); animation: pop .15s ease-out; z-index: 3; }
+.bar { display: flex; align-items: center; gap: 5px; }
+.bar i { font-style: normal; font-size: 11px; width: 14px; }
+.bar b { display: block; width: 48px; height: 6px; background: #efe4d0; border-radius: 6px; overflow: hidden; }
+.bar u { display: block; height: 100%; background: var(--leaf); border-radius: 6px; transition: width .4s; }
+.bar u.low { background: #eaa08e; }
+
+#timer { margin-top: 6px; display: flex; align-items: center; gap: 6px; background: var(--cream); border: 2px solid var(--line); border-radius: 999px; padding: 3px 4px 3px 12px; font-size: 12.5px; font-weight: 600; box-shadow: var(--shadow); font-variant-numeric: tabular-nums; }
+#timer button { border: 0; background: var(--paper); width: 22px; height: 22px; border-radius: 50%; font-size: 11px; color: var(--ink-soft); }
+
+/* ---- Göz kapakları ---- */
+.lid { position: absolute; border-radius: 50%; transform: scaleY(0); transform-origin: 50% 0; transition: transform .07s ease-in; }
+.lid.closed { transform: scaleY(1); }
+.lid.sleep { transform: scaleY(1); }
+.lid.sleep::after { content: ""; position: absolute; left: 12%; right: 12%; top: 38%; height: 28%; border-bottom: 2.5px solid #3b2c22; border-radius: 0 0 50% 50%; }
+
+/* ---- Süsler ---- */
+.deco { position: absolute; pointer-events: none; }
+.float { position: absolute; pointer-events: none; animation: floatUp 1.8s ease-out forwards; font-size: 18px; }
+.zzz { position: absolute; pointer-events: none; font-weight: 800; color: #9a8bb8; animation: zzz 3s ease-out forwards; font-family: ui-rounded, sans-serif; }
+.crumb { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #b98653; pointer-events: none; animation: crumb .9s ease-in forwards; }
+.snack { position: absolute; font-size: 30px; pointer-events: none; transition: transform .5s ease-in, opacity .3s; z-index: 2; }
+
+/* ---- Hareketler ---- */
+#body.idle { animation: breathe 3.2s ease-in-out infinite; }
+#body.sleep { animation: breathe 4.8s ease-in-out infinite; }
+#body.music { animation: sway 1s ease-in-out infinite; }
+#body.read, #body.study { animation: breathe 4s ease-in-out infinite; }
+#body.eat { animation: chomp .32s ease-in-out infinite; }
+#body.sad { animation: sad 3.6s ease-in-out infinite; }
+#body.walk { animation: waddle .38s ease-in-out infinite; }
+#body.hop { animation: hop .55s cubic-bezier(.3,.7,.4,1); }
+#body.wiggle { animation: wiggle .5s ease-in-out; }
+#body.happy { animation: happy .45s ease-in-out 3; }
+#body.drag { animation: dangle .6s ease-in-out infinite; transform-origin: 50% 0; }
+
+@keyframes breathe { 0%,100% { transform: scale(1,1); } 50% { transform: scale(.99,1.028); } }
+@keyframes sway { 0%,100% { transform: rotate(-4deg) scaleY(1); } 25% { transform: rotate(0) scaleY(.97); } 50% { transform: rotate(4deg) scaleY(1); } 75% { transform: rotate(0) scaleY(.97); } }
+@keyframes chomp { 0%,100% { transform: scale(1,1); } 50% { transform: scale(1.03,.94); } }
+@keyframes sad { 0%,100% { transform: translateY(3px) rotate(3deg) scale(1,.97); } 50% { transform: translateY(3px) rotate(3deg) scale(1,.985); } }
+@keyframes waddle { 0%,100% { transform: rotate(-3deg) translateY(0); } 50% { transform: rotate(3deg) translateY(-4px); } }
+@keyframes hop { 0% { transform: scale(1.06,.9); } 35% { transform: translateY(-26px) scale(.96,1.05); } 70% { transform: translateY(0) scale(1.06,.92); } 100% { transform: scale(1,1); } }
+@keyframes wiggle { 0%,100% { transform: rotate(0); } 20% { transform: rotate(-7deg); } 40% { transform: rotate(6deg); } 60% { transform: rotate(-5deg); } 80% { transform: rotate(3deg); } }
+@keyframes happy { 0%,100% { transform: translateY(0) scale(1,1); } 30% { transform: translateY(-12px) scale(.97,1.04); } 60% { transform: translateY(0) scale(1.05,.94); } }
+@keyframes dangle { 0%,100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+@keyframes floatUp { 0% { transform: translateY(0) scale(.6); opacity: 0; } 15% { opacity: 1; transform: translateY(-8px) scale(1); } 100% { transform: translateY(-70px) scale(1); opacity: 0; } }
+@keyframes zzz { 0% { transform: translate(0,0) scale(.6); opacity: 0; } 20% { opacity: .9; } 100% { transform: translate(22px,-48px) scale(1.2); opacity: 0; } }
+@keyframes crumb { 0% { transform: translate(0,0); opacity: 1; } 100% { transform: translate(var(--dx), 46px); opacity: 0; } }
+@keyframes pop { from { transform: scale(.92) translateY(6px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes fadeout { to { opacity: 0; transform: translateY(-4px); } }

@@ -1,0 +1,8 @@
+{
+  "name": "masaustu-arkadasim",
+  "productName": "Arkadasim",
+  "version": "1.0.4",
+  "description": "Masaüstünde seninle yaşayan minik arkadaş",
+  "main": "main.js",
+  "author": "Buse"
+}
